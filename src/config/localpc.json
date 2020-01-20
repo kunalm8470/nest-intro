@@ -1,0 +1,4 @@
+{
+    "port": 4000,
+    "mongodbConnectionString": "mongodb://localhost:27017/nest-demo"
+}
