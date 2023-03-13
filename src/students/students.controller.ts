@@ -27,18 +27,21 @@ export class StudentController {
         }
 
         const student: Student = await this.studentService.addStudent(newStudent.name, newStudent.dateOfBirth);
+        
         return res.status(HttpStatus.CREATED).json(student);
     }
 
     @Get('/')
     async getAllStudents(@Res() res) {
         const students: Student[] = await this.studentService.getAllStudents();
+        
         return res.status(HttpStatus.OK).json(students);
     }
 
     @Get(':id')
     async findStudentById(@Res() res, @Param('id') studentId: string) {
         const foundStudent: Student = await this.studentService.getStudentById(studentId);
+        
         return res.status(HttpStatus.OK).json(foundStudent);
     }
 }

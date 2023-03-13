@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-
 import { Student } from './student.model';
 
 @Injectable()
@@ -11,18 +10,21 @@ export class StudentsService {
     ) {}
 
     async addStudent(name: string, dateOfBirth: Date): Promise<Student> {
-        const newStudent = new this.studentModel({ name: name, dateOfBirth: dateOfBirth });
+        const newStudent = new this.studentModel({ 
+            name: name,
+            dateOfBirth: dateOfBirth 
+        });
+        
         const result = await newStudent.save();
+        
         return result;
     }
 
     async getAllStudents(): Promise<Student[]> {
-        const students: Student[] = await this.studentModel.find({}).exec();
-        return students;
+        return await this.studentModel.find({}).exec();
     }
 
     async getStudentById(id: string): Promise<Student> {
-        const foundStudent: Student = await this.studentModel.findById(id).exec();
-        return foundStudent; 
+        return await this.studentModel.findById(id).exec();
     }
 }
